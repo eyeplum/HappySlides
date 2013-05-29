@@ -7,23 +7,33 @@
 //
 
 #import "HSViewController.h"
+#import "UIView+HSAnimation.h"
+
 
 @interface HSViewController ()
 
+@property (strong, nonatomic) IBOutlet UIImageView *heart;
+
+- (IBAction)performPopAnimation:(id)sender;
+
 @end
+
 
 @implementation HSViewController
 
-- (void)viewDidLoad
-{
+#pragma mark - View Lifecycle
+
+- (void)viewDidLoad {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+#pragma mark - Perform Animations
+
+- (IBAction)performPopAnimation:(id)sender {
+    [self.heart popAnimationWithCompletion:^(BOOL finished) {
+        NSLog(@"%@", finished?@"YES":@"NO");
+    }];
 }
 
 @end

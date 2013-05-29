@@ -18,6 +18,9 @@
 		0B5D96C71756435200301F78 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B5D96C61756435200301F78 /* Default-568h@2x.png */; };
 		0B5D96CA1756435200301F78 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B5D96C81756435200301F78 /* MainStoryboard.storyboard */; };
 		0B5D96CD1756435200301F78 /* HSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5D96CC1756435200301F78 /* HSViewController.m */; };
+		0B5D96D417564A1200301F78 /* heart.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B5D96D317564A1200301F78 /* heart.png */; };
+		0B5D96D617564AC400301F78 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B5D96D517564AC400301F78 /* QuartzCore.framework */; };
+		B3139DDD38BFA0B6195621D8 /* UIView+HSAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = B3139F0941677B58293983FC /* UIView+HSAnimation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +40,10 @@
 		0B5D96C91756435200301F78 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		0B5D96CB1756435200301F78 /* HSViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSViewController.h; sourceTree = "<group>"; };
 		0B5D96CC1756435200301F78 /* HSViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSViewController.m; sourceTree = "<group>"; };
+		0B5D96D317564A1200301F78 /* heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heart.png; sourceTree = "<group>"; };
+		0B5D96D517564AC400301F78 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		B313934EA2119BD5FC4909EF /* UIView+HSAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HSAnimation.h"; sourceTree = "<group>"; };
+		B3139F0941677B58293983FC /* UIView+HSAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HSAnimation.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B5D96D617564AC400301F78 /* QuartzCore.framework in Frameworks */,
 				0B5D96B11756435200301F78 /* UIKit.framework in Frameworks */,
 				0B5D96B31756435200301F78 /* Foundation.framework in Frameworks */,
 				0B5D96B51756435200301F78 /* CoreGraphics.framework in Frameworks */,
@@ -73,6 +81,7 @@
 		0B5D96AF1756435200301F78 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0B5D96D517564AC400301F78 /* QuartzCore.framework */,
 				0B5D96B01756435200301F78 /* UIKit.framework */,
 				0B5D96B21756435200301F78 /* Foundation.framework */,
 				0B5D96B41756435200301F78 /* CoreGraphics.framework */,
@@ -89,6 +98,7 @@
 				0B5D96CB1756435200301F78 /* HSViewController.h */,
 				0B5D96CC1756435200301F78 /* HSViewController.m */,
 				0B5D96B71756435200301F78 /* Supporting Files */,
+				B3139C3EE486301BCC9B5E70 /* Catagory */,
 			);
 			path = HappySlides;
 			sourceTree = "<group>";
@@ -96,6 +106,7 @@
 		0B5D96B71756435200301F78 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0B5D96D317564A1200301F78 /* heart.png */,
 				0B5D96B81756435200301F78 /* HappySlides-Info.plist */,
 				0B5D96B91756435200301F78 /* InfoPlist.strings */,
 				0B5D96BC1756435200301F78 /* main.m */,
@@ -105,6 +116,15 @@
 				0B5D96C61756435200301F78 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B3139C3EE486301BCC9B5E70 /* Catagory */ = {
+			isa = PBXGroup;
+			children = (
+				B3139F0941677B58293983FC /* UIView+HSAnimation.m */,
+				B313934EA2119BD5FC4909EF /* UIView+HSAnimation.h */,
+			);
+			path = Catagory;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -164,6 +184,7 @@
 				0B5D96C51756435200301F78 /* Default@2x.png in Resources */,
 				0B5D96C71756435200301F78 /* Default-568h@2x.png in Resources */,
 				0B5D96CA1756435200301F78 /* MainStoryboard.storyboard in Resources */,
+				0B5D96D417564A1200301F78 /* heart.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,6 +198,7 @@
 				0B5D96BD1756435200301F78 /* main.m in Sources */,
 				0B5D96C11756435200301F78 /* HSAppDelegate.m in Sources */,
 				0B5D96CD1756435200301F78 /* HSViewController.m in Sources */,
+				B3139DDD38BFA0B6195621D8 /* UIView+HSAnimation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,6 +323,7 @@
 				0B5D96D21756435200301F78 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
