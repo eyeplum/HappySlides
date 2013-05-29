@@ -16,13 +16,15 @@
     [UIView animateWithDuration:0.3 animations:^{
         self.layer.transform = CATransform3DMakeScale(1.2, 1.2, 1.0);
     } completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.2 animations:^{
-            self.layer.transform = CATransform3DIdentity;
-        } completion:^(BOOL isFinished) {
-            if (completion) {
-                completion(isFinished);
-            }
-        }];
+        if (finished) {
+            [UIView animateWithDuration:0.2 animations:^{
+                self.layer.transform = CATransform3DIdentity;
+            } completion:^(BOOL isFinished) {
+                if (completion) {
+                    completion(isFinished);
+                }
+            }];
+        }
     }];
 }
 
