@@ -1,4 +1,4 @@
 HappySlides
 ===========
 
-Happy Slides Making App targeting iPad/
+Happy Slides Making App targeting iPad.
