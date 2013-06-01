@@ -8,24 +8,49 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "UIView+HSAnimation.h"
+#import "CAKeyframeAnimation+AHEasing.h"
+
+
+#define kDuration 0.5f
+#define kPosition @"position"
+#define kSize     @"bounds.size"
 
 
 @implementation UIView (HSAnimation)
 
-- (void)popAnimationWithCompletion:(void (^)(BOOL))completion {
-    [UIView animateWithDuration:0.3 animations:^{
-        self.layer.transform = CATransform3DMakeScale(1.2, 1.2, 1.0);
-    } completion:^(BOOL finished) {
-        if (finished) {
-            [UIView animateWithDuration:0.2 animations:^{
-                self.layer.transform = CATransform3DIdentity;
-            } completion:^(BOOL isFinished) {
-                if (completion) {
-                    completion(isFinished);
-                }
-            }];
-        }
-    }];
+- (void)animateSizeChange:(CGSize)size {
+    CAAnimation *boundsChange = [CAKeyframeAnimation animationWithKeyPath:kSize
+                                                                 function:BackEaseOut
+                                                                 fromSize:self.bounds.size
+                                                                   toSize:size];
+    [self performAnimation:boundsChange forKey:kSize];
+    [self setBounds:CGRectMake(0, 0, size.width, size.height)];
 }
+
+
+- (void)animateCenterChange:(CGPoint)point {
+    CAAnimation *centerChange = [CAKeyframeAnimation animationWithKeyPath:kPosition
+                                                                 function:BounceEaseOut
+                                                                fromPoint:self.center
+                                                                  toPoint:point];
+    [self performAnimation:centerChange forKey:kPosition];
+    [self setCenter:point];
+}
+
+
+#pragma mark - Helper Methods
+
+- (void)performAnimation:(CAAnimation *)animation forKey:(NSString *)key {
+    [CATransaction begin];
+    [CATransaction setValue:[NSNumber numberWithFloat:kDuration] forKey:kCATransactionAnimationDuration];
+    [CATransaction setCompletionBlock:^{
+        NSLog(@"Animation %@ complete.", key);
+    }];
+
+    [self.layer addAnimation:animation forKey:key];
+
+    [CATransaction commit];
+}
+
 
 @end

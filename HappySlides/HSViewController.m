@@ -12,9 +12,11 @@
 
 @interface HSViewController ()
 
+@property (strong, nonatomic) IBOutlet UIView *canvas;
 @property (strong, nonatomic) IBOutlet UIImageView *heart;
 
-- (IBAction)performPopAnimation:(id)sender;
+- (IBAction)canvasTapped:(id)sender;
+- (IBAction)heartTapped:(id)sender;
 
 @end
 
@@ -30,10 +32,13 @@
 
 #pragma mark - Perform Animations
 
-- (IBAction)performPopAnimation:(id)sender {
-    [self.heart popAnimationWithCompletion:^(BOOL finished) {
-        NSLog(@"%@", finished?@"YES":@"NO");
-    }];
+- (IBAction)canvasTapped:(id)sender {
+    UITapGestureRecognizer *tapGestureRecognizer = sender;
+    [self.heart animateCenterChange:[tapGestureRecognizer locationInView:self.canvas]];
+}
+
+- (IBAction)heartTapped:(id)sender {
+    [self.heart animateSizeChange:(self.heart.bounds.size.width == 100) ? CGSizeMake(180, 180) : CGSizeMake(100, 100)];
 }
 
 @end

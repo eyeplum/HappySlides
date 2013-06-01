@@ -10,6 +10,7 @@
 
 @interface UIView (HSAnimation)
 
-- (void)popAnimationWithCompletion:(void(^)(BOOL finished))completion;
+- (void)animateSizeChange:(CGSize)size;
+- (void)animateCenterChange:(CGPoint)point;
 
 @end
