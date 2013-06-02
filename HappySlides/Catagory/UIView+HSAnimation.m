@@ -8,7 +8,6 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "UIView+HSAnimation.h"
-#import "CAKeyframeAnimation+AHEasing.h"
 
 
 #define kDuration 0.5f
@@ -18,9 +17,16 @@
 
 @implementation UIView (HSAnimation)
 
+#pragma mark - Size Change Animations
+
 - (void)animateSizeChange:(CGSize)size {
+    [self animateSizeChange:size withFunction:BackEaseOut];
+}
+
+
+- (void)animateSizeChange:(CGSize)size withFunction:(AHEasingFunction)function {
     CAAnimation *boundsChange = [CAKeyframeAnimation animationWithKeyPath:kSize
-                                                                 function:BackEaseOut
+                                                                 function:function
                                                                  fromSize:self.bounds.size
                                                                    toSize:size];
     [self performAnimation:boundsChange forKey:kSize];
@@ -28,9 +34,16 @@
 }
 
 
+#pragma mark - Center Change Animations
+
 - (void)animateCenterChange:(CGPoint)point {
+    [self animateCenterChange:point withFunction:BounceEaseOut];
+}
+
+
+- (void)animateCenterChange:(CGPoint)point withFunction:(AHEasingFunction)function {
     CAAnimation *centerChange = [CAKeyframeAnimation animationWithKeyPath:kPosition
-                                                                 function:BounceEaseOut
+                                                                 function:function
                                                                 fromPoint:self.center
                                                                   toPoint:point];
     [self performAnimation:centerChange forKey:kPosition];
@@ -44,7 +57,7 @@
     [CATransaction begin];
     [CATransaction setValue:[NSNumber numberWithFloat:kDuration] forKey:kCATransactionAnimationDuration];
     [CATransaction setCompletionBlock:^{
-        NSLog(@"Animation %@ complete.", key);
+        //...
     }];
 
     [self.layer addAnimation:animation forKey:key];
