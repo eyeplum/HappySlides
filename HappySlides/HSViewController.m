@@ -8,18 +8,22 @@
 
 #import "HSViewController.h"
 #import "UIView+HSAnimation.h"
+#import "HSView.h"
 
 
 #define kMargin 20
 
 @interface HSViewController ()
 
-@property (strong, nonatomic) IBOutlet UIView *canvas;
+@property (strong, nonatomic) IBOutlet HSView *canvas;
 @property (strong, nonatomic) IBOutlet UIImageView *heart;
 
 @property (strong, nonatomic) IBOutlet UIView *menuContainer;
 
+@property (assign, nonatomic) CGPoint previousPoint;
+
 - (IBAction)canvasTapped:(id)sender;
+- (IBAction)canvasPanned:(id)sender;
 - (IBAction)heartTapped:(id)sender;
 - (IBAction)backgroundDoubleTapped:(id)sender;
 
@@ -40,6 +44,22 @@
 - (IBAction)canvasTapped:(id)sender {
     UITapGestureRecognizer *tapGestureRecognizer = sender;
     [self.heart animateCenterChange:[tapGestureRecognizer locationInView:self.canvas]];
+}
+
+- (IBAction)canvasPanned:(id)sender {
+    UIPanGestureRecognizer *panGestureRecognizer = sender;
+
+    CGPoint currentPoint = [panGestureRecognizer locationInView:self.canvas];
+    CGPoint midPoint     = [self midPointOfPoint:self.previousPoint andPoint:currentPoint];
+
+    if (panGestureRecognizer.state == UIGestureRecognizerStateBegan) {
+        [self.canvas.drawingPath moveToPoint:currentPoint];
+    } else if (panGestureRecognizer.state == UIGestureRecognizerStateChanged) {
+        [self.canvas.drawingPath addQuadCurveToPoint:midPoint controlPoint:self.previousPoint];
+    }
+
+    self.previousPoint = currentPoint;
+    [self.canvas setNeedsDisplay];
 }
 
 
@@ -92,6 +112,14 @@
             self.view.bounds.size.height/2)
                         withFunction:CircularEaseIn];
     [CATransaction commit];
+}
+
+
+- (CGPoint)midPointOfPoint:(CGPoint)p0 andPoint:(CGPoint)p1 {
+    return (CGPoint) {
+            (p0.x + p1.x) / 2.0,
+            (p0.y + p1.y) / 2.0
+    };
 }
 
 @end
